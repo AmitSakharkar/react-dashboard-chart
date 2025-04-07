@@ -1,42 +1,55 @@
-import React from 'react';
+// File: src/pages/Settings.jsx
+import React, { useState } from 'react';
+import EditProfile from '../components/settings/EditProfile';
+import Preferences from '../components/settings/Preferences';
+import Security from '../components/settings/Security';
+
+const TABS = [
+  { key: 'edit-profile', label: 'Edit Profile' },
+  { key: 'preferences', label: 'Preferences' },
+  { key: 'security', label: 'Security' },
+];
 
 const Settings = () => {
+  const [activeTab, setActiveTab] = useState('edit-profile');
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'edit-profile':
+        return <EditProfile />;
+      case 'preferences':
+        return <Preferences />;
+      case 'security':
+        return <Security />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-semibold mb-4">Settings</h2>
-      <div className="bg-white p-6 rounded-xl shadow w-full max-w-2xl">
-        <form className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="mt-1 block w-full rounded-md ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email Address</label>
-            <input
-              type="email"
-              placeholder="john@example.com"
-              className="mt-1 block w-full rounded-md ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              placeholder="********"
-              className="mt-1 block w-full rounded-md ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 px-3 py-2"
-            />
-          </div>
+    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl font-bold mb-6">Settings</h1>
+
+      {/* Tabs */}
+      <div className="flex space-x-4 mb-6 border-b">
+        {TABS.map(tab => (
           <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`pb-2 px-4 border-b-2 transition-all duration-300 ${
+              activeTab === tab.key
+                ? 'border-blue-600 text-blue-600 font-medium'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
           >
-            Save Changes
+            {tab.label}
           </button>
-        </form>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        {renderTabContent()}
       </div>
     </div>
   );

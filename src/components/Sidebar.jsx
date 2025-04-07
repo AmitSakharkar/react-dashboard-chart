@@ -1,30 +1,39 @@
+// File: src/components/Sidebar.jsx
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, Settings } from 'lucide-react';
 
 const Sidebar = () => {
-  const { pathname } = useLocation();
   return (
-    <div className="w-64 bg-gray-900 text-white p-4 hidden md:block">
-      <h2 className="text-2xl font-bold mb-6">Soar App</h2>
-      <nav className="space-y-4">
-        <Link
-          to="/"
-          className={`block px-3 py-2 rounded hover:bg-gray-700 ${
-            pathname === '/' ? 'bg-gray-800' : ''
-          }`}
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/settings"
-          className={`block px-3 py-2 rounded hover:bg-gray-700 ${
-            pathname === '/settings' ? 'bg-gray-800' : ''
-          }`}
-        >
-          Settings
-        </Link>
-      </nav>
-    </div>
+    <aside className="w-64 bg-white shadow-lg hidden md:block">
+      <div className="h-full p-6 flex flex-col">
+        <h1 className="text-2xl font-bold text-blue-600 mb-10">MyFinance</h1>
+        <nav className="space-y-4">
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              `flex items-center space-x-3 p-2 rounded-lg hover:bg-blue-100 ${
+                isActive ? 'bg-blue-100 text-blue-600 font-semibold' : 'text-gray-700'
+              }`
+            }
+          >
+            <LayoutDashboard size={20} />
+            <span>Dashboard</span>
+          </NavLink>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              `flex items-center space-x-3 p-2 rounded-lg hover:bg-blue-100 ${
+                isActive ? 'bg-blue-100 text-blue-600 font-semibold' : 'text-gray-700'
+              }`
+            }
+          >
+            <Settings size={20} />
+            <span>Settings</span>
+          </NavLink>
+        </nav>
+      </div>
+    </aside>
   );
 };
 

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Settings from '../pages/Settings';
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from '@/pages/Dashboard';
+import Settings from '@/pages/Settings';
 
-const AppRoutes = () => (
-  <Routes>
-    <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/settings" element={<Settings />} />
-    <Route path="*" element={<Navigate to="/dashboard" replace />} />
-  </Routes>
-);
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/settings" element={<Settings />} />
+    </Routes>
+  );
+};
 
 export default AppRoutes;

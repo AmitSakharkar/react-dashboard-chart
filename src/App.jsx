@@ -1,20 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import AppRoutes from './routes/AppRoutes';
-import Layout from './layouts/Layout';
-import { Provider } from 'react-redux';
-import { store } from './store';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppLayout from "@/layouts/AppLayout";
+import Dashboard from "@/pages/Dashboard";
+import Settings from "@/pages/Settings";
 
-function App() {
+const App = () => {
   return (
-    <Provider store={store}>
-      <Router>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </Router>
-    </Provider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

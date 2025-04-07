@@ -1,3 +1,7 @@
+# react-dashboard-chart
+The task is to build a financial dashboard application with multiple views for the user. The main purpose of this application is to display an overview of financial activities, card details, transactions, statistics, and user settings.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -6,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

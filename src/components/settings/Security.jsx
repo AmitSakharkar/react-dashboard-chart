@@ -1,87 +1,86 @@
-// File: src/components/settings/Security.jsx
-import React, { useState } from 'react';
-import { Switch } from '@headlessui/react';
+import { useState } from "react";
 
-const Security = () => {
-  const [currentPwd, setCurrentPwd] = useState('');
-  const [newPwd, setNewPwd] = useState('');
-  const [confirmPwd, setConfirmPwd] = useState('');
-  const [twoFA, setTwoFA] = useState(false);
+export default function Security() {
+  const [form, setForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!form.currentPassword) errs.currentPassword = "Current password is required";
+    if (!form.newPassword) errs.newPassword = "New password is required";
+    if (form.newPassword !== form.confirmPassword)
+      errs.confirmPassword = "Passwords do not match";
+    return errs;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newPwd !== confirmPwd) {
-      alert("New passwords don't match.");
-      return;
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      console.log("Security info submitted:", form);
+      // Submit to backend
+      setErrors({});
     }
-    // handle password update logic here
-    alert('Password updated successfully.');
   };
 
   return (
-    <div className="mt-4 max-w-xl space-y-8">
-      {/* Password Update */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Current Password</label>
-          <input
-            type="password"
-            value={currentPwd}
-            onChange={(e) => setCurrentPwd(e.target.value)}
-            required
-            className="w-full mt-1 p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">New Password</label>
-          <input
-            type="password"
-            value={newPwd}
-            onChange={(e) => setNewPwd(e.target.value)}
-            required
-            className="w-full mt-1 p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium">Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPwd}
-            onChange={(e) => setConfirmPwd(e.target.value)}
-            required
-            className="w-full mt-1 p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Update Password
-        </button>
-      </form>
-
-      {/* 2FA Toggle */}
-      <div className="flex items-center justify-between pt-4 border-t">
-        <span className="text-sm font-medium">Two-Factor Authentication</span>
-        <Switch
-          checked={twoFA}
-          onChange={setTwoFA}
-          className={`${
-            twoFA ? 'bg-blue-600' : 'bg-gray-300'
-          } relative inline-flex h-6 w-11 items-center rounded-full transition`}
-        >
-          <span
-            className={`${
-              twoFA ? 'translate-x-6' : 'translate-x-1'
-            } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-          />
-        </Switch>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-xl p-4 space-y-6 bg-white dark:bg-gray-900 rounded-xl shadow-md"
+    >
+      <div>
+        <label className="block text-sm font-medium mb-1">Current Password</label>
+        <input
+          type="password"
+          name="currentPassword"
+          value={form.currentPassword}
+          onChange={handleChange}
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
+        />
+        {errors.currentPassword && <p className="text-red-500 text-sm">{errors.currentPassword}</p>}
       </div>
-    </div>
-  );
-};
 
-export default Security;
+      <div>
+        <label className="block text-sm font-medium mb-1">New Password</label>
+        <input
+          type="password"
+          name="newPassword"
+          value={form.newPassword}
+          onChange={handleChange}
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
+        />
+        {errors.newPassword && <p className="text-red-500 text-sm">{errors.newPassword}</p>}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Confirm New Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          value={form.confirmPassword}
+          onChange={handleChange}
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
+        />
+        {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
+      >
+        Update Password
+      </button>
+    </form>
+  );
+}

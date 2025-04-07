@@ -1,72 +1,54 @@
-// File: src/components/dashboard/WeeklyActivityChart.jsx
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   BarElement,
   CategoryScale,
   LinearScale,
   Tooltip,
-} from 'chart.js';
+} from "chart.js";
+import { weeklyActivityData } from "../../data/charts";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
-const WeeklyActivityChart = () => {
-  const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [
-      {
-        label: 'Activity',
-        data: [3000, 2000, 4000, 1000, 2500, 3800, 2900],
-        backgroundColor: '#4F46E5',
-        borderRadius: 8,
-        barThickness: 28,
+const data = weeklyActivityData;
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        stepSize: 200,
+        color: "#94a3b8", // slate-400
+        font: { size: 12 },
       },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: '#6B7280',
-        },
-        grid: {
-          color: '#E5E7EB',
-        },
-      },
-      x: {
-        ticks: {
-          color: '#6B7280',
-        },
-        grid: {
-          display: false,
-        },
+      grid: {
+        color: "#e2e8f0", // slate-200
+        drawBorder: false,
       },
     },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: (context) => `₹${context.parsed.y}`,
-        },
+    x: {
+      ticks: {
+        color: "#94a3b8", // slate-400
+        font: { size: 12 },
       },
-      legend: {
+      grid: {
         display: false,
       },
     },
-  };
-
-  return (
-    <div className="bg-white rounded-xl p-4 shadow-sm h-[300px]">
-      <h2 className="text-xl font-semibold mb-4">Weekly Activity</h2>
-      <div className="h-[220px]">
-        <Bar data={data} options={options} />
-      </div>
-    </div>
-  );
+  },
 };
 
-export default WeeklyActivityChart;
+export default function WeeklyActivityChart() {
+  return (
+    <div className="bg-white rounded-2xl shadow p-6 w-full h-full">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold">Weekly Activity</h2>
+      </div>
+      <Bar data={data} options={options} className="w-full h-64" />
+    </div>
+  );
+}

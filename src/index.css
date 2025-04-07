@@ -1,10 +1,9 @@
-/* File: src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: add custom styles here */
+/* Optional: smooth font rendering and global tweaks */
 body {
+  @apply bg-background text-gray-800;
   font-family: 'Inter', sans-serif;
-  background-color: #f9fafb; /* light neutral tone for background */
 }

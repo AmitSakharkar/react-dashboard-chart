@@ -1,21 +1,21 @@
-export const cards = [
+const cards = [
     {
-      id: 1,
-      type: "Visa",
+      id: "card1",
       number: "**** **** **** 1234",
-      holder: "John Doe",
-      expiry: "12/25",
-      balance: "$5,230.00",
+      type: "Visa",
+      expiry: "12/26",
+      holder: "Alex Johnson",
       bgColor: "bg-gradient-to-r from-indigo-500 to-purple-500",
     },
     {
-      id: 2,
-      type: "Mastercard",
+      id: "card2",
       number: "**** **** **** 5678",
-      holder: "Jane Smith",
-      expiry: "08/24",
-      balance: "$3,120.00",
-      bgColor: "bg-gradient-to-r from-pink-500 to-rose-500",
+      type: "Mastercard",
+      expiry: "08/25",
+      holder: "Alex Johnson",
+      bgColor: "bg-gradient-to-r from-green-400 to-blue-500",
     },
   ];
+  
+  export default cards;
   

@@ -1,68 +1,43 @@
-// File: src/components/dashboard/ExpenseStatistics.jsx
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { doughnutData } from "../../data/charts";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const ExpenseStatistics = () => {
-  const data = {
-    labels: ['Food', 'Shopping', 'Bills', 'Travel'],
-    datasets: [
-      {
-        label: 'Expenses',
-        data: [4000, 2500, 3000, 1500],
-        backgroundColor: ['#6366F1', '#F59E0B', '#EF4444', '#10B981'],
-        borderWidth: 0,
-      },
-    ],
-  };
+const data = doughnutData;
 
-  const options = {
-    cutout: '70%',
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `${context.label}: ₹${context.parsed}`,
-        },
-      },
+const options = {
+  cutout: "70%",
+  plugins: {
+    legend: {
+      display: false,
     },
-  };
+  },
+};
 
-  const total = data.datasets[0].data.reduce((sum, val) => sum + val, 0);
-
+export default function ExpenseStatistics() {
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm h-[300px] flex flex-col justify-between">
-      <h2 className="text-xl font-semibold">Expense Statistics</h2>
-      <div className="flex justify-center items-center h-[200px] relative">
-        <Doughnut data={data} options={options} />
-        <div className="absolute text-center">
-          <p className="text-sm text-gray-500">Total</p>
-          <p className="text-lg font-bold">₹{total}</p>
+    <div className="bg-white rounded-2xl shadow p-6 h-full">
+      <h2 className="text-lg font-semibold mb-4">Expense Statistics</h2>
+      <div className="flex items-center justify-between">
+        <div className="w-32 h-32">
+          <Doughnut data={data} options={options} />
         </div>
-      </div>
-      <div className="flex justify-between mt-4 text-sm text-gray-600">
-        {data.labels.map((label, idx) => (
-          <div key={label} className="flex items-center gap-2">
-            <span
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: data.datasets[0].backgroundColor[idx] }}
-            />
-            {label}
-          </div>
-        ))}
+        <ul className="space-y-3 text-sm ml-4">
+          {data.labels.map((label, index) => (
+            <li key={label} className="flex items-center">
+              <span
+                className="inline-block w-3 h-3 rounded-full mr-2"
+                style={{ backgroundColor: data.datasets[0].backgroundColor[index] }}
+              ></span>
+              <span className="text-slate-600">{label}</span>
+              <span className="ml-auto font-medium text-slate-800">
+                ₹{data.datasets[0].data[index]}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
-};
-
-export default ExpenseStatistics;
+}

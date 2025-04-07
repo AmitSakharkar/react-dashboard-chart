@@ -1,80 +1,77 @@
-// File: src/components/dashboard/RecentTransactions.jsx
-import React from 'react';
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 
 const transactions = [
   {
     id: 1,
-    name: 'Anita Sharma',
-    date: 'Apr 6, 2025',
-    amount: -2500,
-    type: 'Sent',
-    img: '/avatars/user2.png',
+    name: "Netflix Subscription",
+    date: "Apr 1, 2025",
+    amount: "- ₹499",
+    type: "debit",
   },
   {
     id: 2,
-    name: 'Raj Mehta',
-    date: 'Apr 5, 2025',
-    amount: 4500,
-    type: 'Received',
-    img: '/avatars/user3.png',
+    name: "Salary Credited",
+    date: "Apr 1, 2025",
+    amount: "+ ₹91,000",
+    type: "credit",
   },
   {
     id: 3,
-    name: 'Electricity Bill',
-    date: 'Apr 3, 2025',
-    amount: -1700,
-    type: 'Sent',
-    img: '/icons/bill.png',
+    name: "Zomato Order",
+    date: "Mar 30, 2025",
+    amount: "- ₹1,250",
+    type: "debit",
+  },
+  {
+    id: 4,
+    name: "Grocery Shopping",
+    date: "Mar 29, 2025",
+    amount: "- ₹3,200",
+    type: "debit",
+  },
+  {
+    id: 5,
+    name: "Investment Return",
+    date: "Mar 28, 2025",
+    amount: "+ ₹2,500",
+    type: "credit",
   },
 ];
 
-const RecentTransactions = () => {
+export default function RecentTransactions() {
   return (
-    <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
-      <div className="flex flex-col gap-4">
+    <div className="bg-white rounded-2xl shadow p-6 h-full flex flex-col">
+      <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+      <div className="flex-1 overflow-y-auto space-y-4 pr-1">
         {transactions.map((tx) => (
-          <div
-            key={tx.id}
-            className="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm"
-          >
-            <div className="flex items-center gap-4">
-              <img
-                src={tx.img}
-                alt={tx.name}
-                className="w-10 h-10 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-medium">{tx.name}</p>
-                <p className="text-xs text-gray-500">{tx.date}</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p
-                className={`font-semibold ${
-                  tx.amount < 0 ? 'text-red-500' : 'text-green-600'
+          <div key={tx.id} className="flex justify-between items-center">
+            <div className="flex items-center space-x-3">
+              <div
+                className={`p-2 rounded-full ${
+                  tx.type === "credit" ? "bg-green-100" : "bg-red-100"
                 }`}
               >
-                {tx.amount < 0 ? `-₹${Math.abs(tx.amount)}` : `+₹${tx.amount}`}
-              </p>
-              <p className="text-xs text-gray-500 flex items-center justify-end gap-1">
-                {tx.type === 'Sent' ? (
-                  <>
-                    Sent <ArrowUpRight size={12} />
-                  </>
+                {tx.type === "credit" ? (
+                  <ArrowDownRight className="text-green-600 w-5 h-5" />
                 ) : (
-                  <>
-                    Received <ArrowDownRight size={12} />
-                  </>
+                  <ArrowUpRight className="text-red-600 w-5 h-5" />
                 )}
-              </p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-800">{tx.name}</p>
+                <p className="text-sm text-gray-500">{tx.date}</p>
+              </div>
+            </div>
+            <div
+              className={`text-sm font-medium ${
+                tx.type === "credit" ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {tx.amount}
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default RecentTransactions;
+}

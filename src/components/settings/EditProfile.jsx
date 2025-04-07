@@ -1,99 +1,95 @@
-// File: src/components/settings/EditProfile.jsx
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const EditProfile = () => {
+export default function EditProfile() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    profilePic: null,
+    name: "John Doe",
+    email: "john@example.com",
+    phone: "+1 234 567 8900",
+    avatar: "",
   });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    if (name === "avatar") {
+      setFormData({ ...formData, avatar: URL.createObjectURL(files[0]) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate API call or validation
-    console.log('Updated profile data:', formData);
+    console.log("Profile updated:", formData);
+    // Handle form submission logic
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mt-4">
-      <div className="space-y-2">
-        <label htmlFor="name" className="block text-sm font-medium">
-          Full Name
-        </label>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-xl space-y-6 p-4 bg-white dark:bg-gray-900 rounded-xl shadow-md"
+    >
+      <div className="flex items-center space-x-4">
+        <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+          {formData.avatar ? (
+            <img
+              src={formData.avatar}
+              alt="Avatar"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-500">
+              Avatar
+            </div>
+          )}
+        </div>
+        <input
+          type="file"
+          name="avatar"
+          accept="image/*"
+          onChange={handleChange}
+          className="text-sm text-gray-500"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Name</label>
         <input
           type="text"
           name="name"
-          id="name"
-          placeholder="John Doe"
           value={formData.name}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-          required
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="email" className="block text-sm font-medium">
-          Email Address
-        </label>
+      <div>
+        <label className="block text-sm font-medium mb-1">Email</label>
         <input
           type="email"
           name="email"
-          id="email"
-          placeholder="john@example.com"
           value={formData.email}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-          required
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="phone" className="block text-sm font-medium">
-          Phone Number
-        </label>
+      <div>
+        <label className="block text-sm font-medium mb-1">Phone</label>
         <input
-          type="tel"
+          type="text"
           name="phone"
-          id="phone"
-          placeholder="+1 234 567 890"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <label htmlFor="profilePic" className="block text-sm font-medium">
-          Profile Picture
-        </label>
-        <input
-          type="file"
-          name="profilePic"
-          id="profilePic"
-          accept="image/*"
-          onChange={handleChange}
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          className="w-full p-2 border rounded-md bg-gray-100 dark:bg-gray-800"
         />
       </div>
 
       <button
         type="submit"
-        className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
       >
         Save Changes
       </button>
     </form>
   );
-};
-
-export default EditProfile;
+}

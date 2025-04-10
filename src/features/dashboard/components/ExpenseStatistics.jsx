@@ -6,11 +6,6 @@ import {
   Container,
   ChartContainer,
   NoData,
-  Legend,
-  LegendItem,
-  LegendColor,
-  LegendLabel,
-  LegendValue
 } from './styles/ExpenseStatistics.styles';
 
 // Register required components
@@ -101,15 +96,6 @@ const ExpenseStatistics = ({ data }) => {
       <ChartContainer>
         <Pie data={chartData} options={options} />
       </ChartContainer>
-      <Legend>
-        {data?.map((item, index) => (
-          <LegendItem key={index}>
-            <LegendColor color={item.color} />
-            <LegendLabel>{item.category}</LegendLabel>
-            <LegendValue>${item.value}</LegendValue>
-          </LegendItem>
-        ))}
-      </Legend>
     </Container>
   );
 };

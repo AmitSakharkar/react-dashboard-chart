@@ -108,7 +108,10 @@ const WeeklyActivityChart = ({ data }) => {
       borderRadius: '12px',
       padding: '16px',
       boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+  gap: '16px'
     }}>
       <div style={{
         position: 'absolute',

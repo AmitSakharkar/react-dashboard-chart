@@ -110,15 +110,19 @@ const Avatar = styled.div`
 
 export default function Header({ title = "Dashboard", onMenuClick }) {
   const user = useSelector((state) => state.user)
+  const selectedTab = useSelector((state) => state.layout.selectedTab);
   const [showMobileSearch, setShowMobileSearch] = useState(false)
+  const isMobile = window.innerWidth <= 768;
 
   return (
     <HeaderContainer>
       <LeftSection>
-        <MenuIcon onClick={onMenuClick}>
-          <FiMenu />
-        </MenuIcon>
-        <Title>{title}</Title>
+        {isMobile && (
+          <MenuIcon onClick={onMenuClick}>
+            <FiMenu />
+          </MenuIcon>
+        )}
+        <Title>{selectedTab}</Title>
       </LeftSection>
 
       <DesktopSearch>

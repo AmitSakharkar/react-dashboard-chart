@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { cardsData } from "../components/MyCards/CardData";
+import { cardsData } from "../components/MyCards/cardData";
 import masterCardIconDark from '../assets/icon/masterCardDark.svg';
 import masterCardIconLight from "../assets/icon/masterCardLight.svg";
 import chipIcon1 from '../assets/icon/chip1.svg';
@@ -94,7 +94,7 @@ const AllCardsPage = () => {
               <ChipIcon src={card.id % 2 === 0 ? chipIcon2 : chipIcon1} alt="Chip" />
             </CardTop>
             <div style={{ 
-              marginTop: '40px',
+              marginTop: '20px',
               display: 'flex',
               justifyContent: 'space-between'
             }}>

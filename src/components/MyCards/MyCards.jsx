@@ -5,7 +5,7 @@ import masterCardIconDark from '../../assets/icon/masterCardDark.svg';
 import masterCardIconLight from "../../assets/icon/masterCardLight.svg";
 import chipIcon1 from '../../assets/icon/chip1.svg';
 import chipIcon2 from '../../assets/icon/chip2.svg';
-import { cardsData } from './CardData';
+import { cardsData } from './cardData';
 
 const CardSection = styled.section`
   padding: 24px;

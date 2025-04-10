@@ -36,21 +36,21 @@ const GridTwoColumns = styled.div`
 `;
 
 const mockTransactions = [
-  { 
-    description: 'Grocery Shopping', 
-    amount: -1200, 
+  {
+    description: 'Grocery Shopping',
+    amount: -1200,
     icon: TransactionIcon1,
     date: 'Today, 10:45 AM'
   },
-  { 
-    description: 'Salary Deposit', 
-    amount: 50000, 
+  {
+    description: 'Salary Deposit',
+    amount: 50000,
     icon: TransactionIcon2,
-    date: 'Yesterday, 2:30 PM' 
+    date: 'Yesterday, 2:30 PM'
   },
-  { 
-    description: 'Electric Bill', 
-    amount: -2500, 
+  {
+    description: 'Electric Bill',
+    amount: -2500,
     icon: TransactionIcon3,
     date: 'Mar 15, 9:00 AM'
   }
@@ -76,16 +76,18 @@ const mockExpenseData = [
 export default function Dashboard() {
   return (
     <DashboardWrapper>
-      <MyCards />
       <GridTwoColumns>
+        <MyCards />
         <RecentTransactions transactions={mockTransactions} />
-        <WeeklyActivityChart data={mockActivityData} />
       </GridTwoColumns>
       <GridTwoColumns>
+        <WeeklyActivityChart data={mockActivityData} />
         <ExpenseStatistics data={mockExpenseData} />
-        <QuickTransfer />
       </GridTwoColumns>
-      <BalanceHistoryChart />
+      <GridTwoColumns>
+        <QuickTransfer />
+        <BalanceHistoryChart />
+      </GridTwoColumns>
     </DashboardWrapper>
   );
 }

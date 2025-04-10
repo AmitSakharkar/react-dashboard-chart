@@ -4,35 +4,55 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { setSelectedTab } from '../../../store/layoutSlice';
 
-const Sidebar = styled.div`
-  width: 240px;
+const SidebarTitle = styled.h2`
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-left: 0.5rem;
+  color: #1a1a1a;
+`;
+
+const SidebarContainer = styled.div`
+  width: 15rem;
   height: 100vh;
   position: fixed;
-  left: ${props => props.$isMobile ? (props.$isOpen ? '0' : '-240px') : '0'};
+  left: ${props => props.$isMobileOpen ? '0' : '-15rem'};
   top: 0;
   background: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   z-index: 100;
-  transition: left 0.3s ease;
+  transition: left 0.3s ease, box-shadow 0.3s ease;
+  overflow-y: auto;
 
-  @media (max-width: 768px) {
-    box-shadow: ${props => props.$isOpen ? '2px 0 10px rgba(0, 0, 0, 0.1)' : 'none'};
+  @media (min-width: 768px) {
+    left: ${props => props.$isOpen ? '0' : '-15rem'};
+    box-shadow: ${props => props.$isOpen ? '2px 0 10px rgba(0, 0, 0, 0.05)' : 'none'};
   }
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled.button`
+  width: 100%;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 500;
-  color: ${(props) => (props.$active ? '#1a1a1a' : '#666')};
+  border: none;
   background: ${(props) => (props.$active ? '#f5f5f5' : 'transparent')};
+  color: ${(props) => (props.$active ? '#1a1a1a' : '#666')};
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
 
   &:hover {
     background: #f5f5f5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #666;
+    outline-offset: 2px;
   }
 `;
 
@@ -46,18 +66,17 @@ const menuOptions = [
 
 const routeMap = {
   'Dashboard': '/dashboard',
-  'Transactions': '/cards',  // Changed to match existing route
-  'Analytics': '/dashboard',  // Temporarily pointing to dashboard
+  'Transactions': '/cards',
+  'Analytics': '/dashboard',
   'Settings': '/settings',
-  'Support': '/settings'  // Temporarily pointing to settings
+  'Support': '/settings'
 };
 
-const Drawer = ({ isOpen, isMobileOpen, onClose }) => {
+const Sidebar = ({ isOpen, isMobileOpen, onClose }) => {
   const dispatch = useDispatch();
   const selectedTab = useSelector((state) => state.layout.selectedTab);
   const location = useLocation();
   const navigate = useNavigate();
-  const isMobile = window.innerWidth <= 768;
 
   // Sync selected tab with current route
   React.useEffect(() => {
@@ -70,25 +89,32 @@ const Drawer = ({ isOpen, isMobileOpen, onClose }) => {
   }, [location.pathname, dispatch]);
 
   return (
-    <Sidebar 
-      $isMobile={isMobile}
-      $isOpen={isMobile ? isMobileOpen : isOpen}
-      onClick={isMobile ? onClose : undefined}
+    <SidebarContainer 
+      $isOpen={isOpen}
+      $isMobileOpen={isMobileOpen}
+      onClick={(e) => {
+        // Only close if clicking on backdrop (not menu items)
+        if (isMobileOpen && e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
     >
       {menuOptions.map((item) => (
         <MenuItem
           key={item}
-          $active={selectedTab === item ? "true" : undefined}
+          $active={selectedTab === item}
           onClick={() => {
             dispatch(setSelectedTab(item));
             navigate(routeMap[item]);
+            if (isMobileOpen) onClose();
           }}
+          aria-current={selectedTab === item ? 'page' : undefined}
         >
           {item}
         </MenuItem>
       ))}
-    </Sidebar>
+    </SidebarContainer>
   );
 };
 
-export default Drawer;
+export default Sidebar;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import chipIcon1 from '../../assets/icon/chip-1.svg';
 import chipIcon2 from '../../assets/icon/chip-2.svg';
 import mastercardIconDark from '../../assets/icon/mastercardDark.svg';
-import mastercardIconLight from '../../assets/icon/masterCardLight.png';
+import mastercardIconLight from '../../assets/icon/masterCardLight.svg';
 
 const Card = styled.div`
   flex: 0 0 auto;

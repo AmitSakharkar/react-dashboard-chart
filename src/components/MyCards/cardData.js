@@ -1,23 +1,50 @@
-const cardData = [
-    {
-      id: 1,
-      holder: "Jonathan Doe",
-      number: "3778 **** **** 1234",
-      expiry: "12/26",
-      brand: "visa",
-      balance: "₹45,230.00",
-      gradient: "linear-gradient(135deg, #5B5A6F, #000000)",
-    },
-    {
-      id: 2,
-      holder: "Jonathan Doe",
-      number: "3778 **** **** 1234",
-      expiry: "03/27",
-      brand: "mastercard",
-      balance: "₹18,970.50",
-      gradient: "linear-gradient(135deg, #FFFFFF, #FFFFFF)",
-    }
-  ];
-  
-  export default cardData;
-  
+export const cardsData = [
+  {
+    id: 1,
+    cardNumber: "3778 **** **** 1234",
+    holderName: "John Doe",
+    expiryDate: "09/25",
+    balance: "₹35,000.00",
+    gradient: "linear-gradient(135deg, #5B5A6F, #000000)",
+  },
+  {
+    id: 2,
+    cardNumber: "3778 **** **** 1234",
+    holderName: "Jane Smith",
+    expiryDate: "12/24",
+    balance: "₹15,000.00",
+    gradient: "linear-gradient(135deg, #FFFFFF, #DFEAF2)",
+  },
+  {
+    id: 3,
+    cardNumber: "4111 **** **** 1111",
+    holderName: "Robert Johnson",
+    expiryDate: "03/26",
+    balance: "₹42,500.00",
+    gradient: "linear-gradient(135deg, #5B5A6F, #000000)",
+  },
+  {
+    id: 4,
+    cardNumber: "5555 **** **** 5555",
+    holderName: "Emily Davis",
+    expiryDate: "06/25",
+    balance: "₹28,750.00",
+    gradient: "linear-gradient(135deg, #FFFFFF, #DFEAF2)",
+  },
+  {
+    id: 5,
+    cardNumber: "6011 **** **** 9999",
+    holderName: "Michael Wilson",
+    expiryDate: "11/24",
+    balance: "₹50,000.00",
+    gradient: "linear-gradient(135deg, #5B5A6F, #000000)",
+  },
+  {
+    id: 6,
+    cardNumber: "3400 **** **** 2020",
+    holderName: "Sarah Miller",
+    expiryDate: "08/26",
+    balance: "₹22,300.00",
+    gradient: "linear-gradient(135deg, #FFFFFF, #DFEAF2)",
+  },
+];

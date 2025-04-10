@@ -1,38 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import masterCardIconDark from '../../assets/icon/masterCardDark.svg';
-import masterCardIconLight from "../../assets/icon/masterCardLight.svg";
-import chipIcon1 from '../../assets/icon/chip1.svg';
-import chipIcon2 from '../../assets/icon/chip2.svg';
-import { cardsData } from './CardData';
+import { cardsData } from "../components/MyCards/CardData";
+import masterCardIconDark from '../assets/icon/masterCardDark.svg';
+import masterCardIconLight from "../assets/icon/masterCardLight.svg";
+import chipIcon1 from '../assets/icon/chip1.svg';
+import chipIcon2 from '../assets/icon/chip2.svg';
 
-const CardSection = styled.section`
+const PageContainer = styled.div`
   padding: 24px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-`;
-
-const SectionHeader = styled.h2`
-  font-size: 20px;
-  font-weight: 700;
-  color: #333B69;
-  margin-bottom: 24px;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SeeAllButton = styled.button`
-  background: none;
-  border: none;
-  color: #2D60FF;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
 `;
 
 const CardWrapper = styled.div`
@@ -105,20 +80,11 @@ const CardValue = styled.span`
   color: ${props => props.cardID % 2 === 0 ? '#343C6A' : '#FFFFFF'};
 `;
 
-const MyCards = () => {
-  const navigate = useNavigate();
-  const displayedCards = cardsData.slice(0, 2);
-
+const AllCardsPage = () => {
   return (
-    <CardSection>
-      <SectionHeader>
-        My Cards
-        <SeeAllButton onClick={() => navigate('/cards')}>
-          See All
-        </SeeAllButton>
-      </SectionHeader>
+    <PageContainer>
       <CardWrapper>
-        {displayedCards.map((card) => (
+        {cardsData.map((card) => (
           <Card key={card.id} gradient={card.gradient} cardID={card.id}>
             <CardTop>
               <CardInfo>
@@ -148,8 +114,8 @@ const MyCards = () => {
           </Card>
         ))}
       </CardWrapper>
-    </CardSection>
+    </PageContainer>
   );
 };
 
-export default MyCards;
+export default AllCardsPage;

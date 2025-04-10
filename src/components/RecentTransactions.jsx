@@ -61,10 +61,10 @@ const RecentTransactions = ({ transactions }) => (
             gap: '4px'
           }}>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.5 2H2.5C2.22386 2 2 2.22386 2 2.5V9.5C2 9.77614 2.22386 10 2.5 10H9.5C9.77614 10 10 9.77614 10 9.5V2.5C10 2.22386 9.77614 2 9.5 2Z" stroke="#999" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 1V3" stroke="#999" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4 1V3" stroke="#999" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 5H10" stroke="#999" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.5 2H2.5C2.22386 2 2 2.22386 2 2.5V9.5C2 9.77614 2.22386 10 2.5 10H9.5C9.77614 10 10 9.77614 10 9.5V2.5C10 2.22386 9.77614 2 9.5 2Z" stroke="#999" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 1V3" stroke="#999" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 1V3" stroke="#999" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 5H10" stroke="#999" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             {tx?.date}
           </div>

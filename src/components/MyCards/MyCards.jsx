@@ -42,7 +42,7 @@ const CardWrapper = styled.div`
 `;
 
 const Card = styled.div`
-  background: ${({ gradient }) => gradient};
+  background: ${({ $gradient }) => $gradient};
   border-radius: 16px;
   padding: 20px;
   color: white;
@@ -51,7 +51,7 @@ const Card = styled.div`
   height: 190px;
   position: relative;
   overflow: hidden;
-  border: ${props => props.cardID % 2 === 0 ? '1px solid rgba(0, 0, 0, 1)' : '1px solid rgba(223, 234, 242, 1)'}
+  border: ${props => props.$cardID % 2 === 0 ? '1px solid rgba(0, 0, 0, 1)' : '1px solid rgba(223, 234, 242, 1)'}
 `;
 
 const CardTop = styled.div`
@@ -75,7 +75,7 @@ const CardNumber = styled.div`
   font-family: 'Inter', sans-serif;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: ${props => props.cardID % 2 === 0 ? '#343C6A' : '#FFFFFF'};
+  color: ${props => props.$cardID % 2 === 0 ? '#343C6A' : '#FFFFFF'};
 `;
 
 const CardDetails = styled.div`
@@ -96,13 +96,13 @@ const CardLabel = styled.span`
   font-size: 14px;
   opacity: 0.8;
   font-weight: 400;
-  color: ${props => props.cardID % 2 === 0 ? '#718EBF' : '#FFFFFF'};
+  color: ${props => props.$cardID % 2 === 0 ? '#718EBF' : '#FFFFFF'};
 `;
 
 const CardValue = styled.span`
   font-size: 16px;
   font-weight: 600;
-  color: ${props => props.cardID % 2 === 0 ? '#343C6A' : '#FFFFFF'};
+  color: ${props => props.$cardID % 2 === 0 ? '#343C6A' : '#FFFFFF'};
 `;
 
 const MyCards = () => {
@@ -119,30 +119,30 @@ const MyCards = () => {
       </SectionHeader>
       <CardWrapper>
         {displayedCards.map((card) => (
-          <Card key={card.id} gradient={card.gradient} cardID={card.id}>
+          <Card key={card.id} $gradient={card.gradient} $cardID={card.id}>
             <CardTop>
               <CardInfo>
-                <CardLabel cardID={card.id}>Balance</CardLabel>
-                <CardValue cardID={card.id}>${card.balance}</CardValue>
+                <CardLabel $cardID={card.id}>Balance</CardLabel>
+                <CardValue $cardID={card.id}>${card.balance}</CardValue>
               </CardInfo>
               <ChipIcon src={card.id % 2 === 0 ? chipIcon2 : chipIcon1} alt="Chip" />
             </CardTop>
             <div style={{ 
-              marginTop: '40px',
+              marginTop: '20px',
               display: 'flex',
               justifyContent: 'space-between'
             }}>
               <CardInfo>
-                <CardLabel cardID={card.id}>Card Holder</CardLabel>
-                <CardValue cardID={card.id}>{card.holderName}</CardValue>
+                <CardLabel $cardID={card.id}>Card Holder</CardLabel>
+                <CardValue $cardID={card.id}>{card.holderName}</CardValue>
               </CardInfo>
               <CardInfo>
-                <CardLabel cardID={card.id}>Expires</CardLabel>
-                <CardValue cardID={card.id}>{card.expiryDate}</CardValue>
+                <CardLabel $cardID={card.id}>Expires</CardLabel>
+                <CardValue $cardID={card.id}>{card.expiryDate}</CardValue>
               </CardInfo>
             </div>
             <CardDetails>
-              <CardNumber cardID={card.id}>{card.cardNumber}</CardNumber>
+              <CardNumber $cardID={card.id}>{card.cardNumber}</CardNumber>
               <CardLogo src={card.id % 2 === 0 ? masterCardIconLight : masterCardIconDark} alt="Mastercard" />
             </CardDetails>
           </Card>

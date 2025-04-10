@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import chipIcon1 from '../../assets/icon/chip-1.svg';
-import chipIcon2 from '../../assets/icon/chip-2.svg';
-import mastercardIconDark from '../../assets/icon/mastercardDark.svg';
+import chipIcon1 from '../../assets/icon/chip1.svg';
+import chipIcon2 from '../../assets/icon/chip2.svg';
+import mastercardIconDark from '../../assets/icon/masterCardDark.svg';
 import mastercardIconLight from '../../assets/icon/masterCardLight.svg';
 
 const Card = styled.div`

@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React from 'react';
 import styled from 'styled-components';
 import MyCards from '../components/MyCards/MyCards';
@@ -54,7 +53,7 @@ const mockTransactions = [
     amount: -2500, 
     icon: TransactionIcon3,
     date: 'Mar 15, 9:00 AM'
-  },
+  }
 ];
 
 const mockActivityData = [
@@ -67,6 +66,13 @@ const mockActivityData = [
   { day: 'Sun', value: 40, baseline: 30 }
 ];
 
+const mockExpenseData = [
+  { category: 'Food', value: 1200, color: '#FF6384' },
+  { category: 'Transport', value: 800, color: '#36A2EB' },
+  { category: 'Entertainment', value: 500, color: '#FFCE56' },
+  { category: 'Utilities', value: 1000, color: '#4BC0C0' }
+];
+
 export default function Dashboard() {
   return (
     <DashboardWrapper>
@@ -76,7 +82,7 @@ export default function Dashboard() {
         <WeeklyActivityChart data={mockActivityData} />
       </GridTwoColumns>
       <GridTwoColumns>
-        <ExpenseStatistics />
+        <ExpenseStatistics data={mockExpenseData} />
         <QuickTransfer />
       </GridTwoColumns>
       <BalanceHistoryChart />

@@ -1,107 +1,94 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  FiHome,
-  FiCreditCard,
-  FiRepeat,
-  FiBarChart2,
-  FiSettings,
-  FiSend
-} from 'react-icons/fi';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { setSelectedTab } from '../store/layoutSlice';
 
-const SidebarWrapper = styled.aside`
-  background-color: #ffffff;
-  border-radius: 24px;
-  padding: 28px 20px;
-  width: 252px;
-  align-self: flex-start;
-  display: none;
-  flex-direction: column;
-  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.04);
-  margin: 32px 0;
-  font-family: 'Inter', sans-serif;
+const Sidebar = styled.div`
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: ${props => props.$isMobile ? (props.$isOpen ? '0' : '-240px') : '0'};
+  top: 0;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  z-index: 100;
+  transition: left 0.3s ease;
 
-  @media (min-width: 1024px) {
-    display: flex;
+  @media (max-width: 768px) {
+    box-shadow: ${props => props.$isOpen ? '2px 0 10px rgba(0, 0, 0, 0.1)' : 'none'};
   }
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
-  font-weight: 700;
-  color: #1f2937;
-  text-align: center;
-  margin-bottom: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-`;
-
-const NavGroup = styled.nav`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const NavItem = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  border-radius: 16px;
-  font-size: 16px;
-  color: #6b7280;
-  text-decoration: none;
+const MenuItem = styled.div`
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
   font-weight: 500;
-  transition: background 0.2s ease, color 0.2s ease;
-
-  &.active {
-    background-color: #e0e7ff;
-    color: #3b82f6;
-  }
+  color: ${(props) => (props.$active ? '#1a1a1a' : '#666')};
+  background: ${(props) => (props.$active ? '#f5f5f5' : 'transparent')};
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #f3f4f6;
-    color: #374151;
-  }
-
-  svg {
-    font-size: 20px;
+    background: #f5f5f5;
   }
 `;
 
-export default function Sidebar() {
-  return (
-    <SidebarWrapper>
-      <Logo>
-        <FiSend />
-        Soar Task
-      </Logo>
+const menuOptions = [
+  'Dashboard',
+  'Transactions',
+  'Analytics',
+  'Settings',
+  'Support'
+];
 
-      <NavGroup>
-        <NavItem to="/dashboard">
-          <FiHome />
-          Dashboard
-        </NavItem>
-        <NavItem to="/cards">
-          <FiCreditCard />
-          Cards
-        </NavItem>
-        <NavItem to="/transactions">
-          <FiRepeat />
-          Transactions
-        </NavItem>
-        <NavItem to="/analytics">
-          <FiBarChart2 />
-          Analytics
-        </NavItem>
-        <NavItem to="/settings">
-          <FiSettings />
-          Settings
-        </NavItem>
-      </NavGroup>
-    </SidebarWrapper>
+const routeMap = {
+  'Dashboard': '/dashboard',
+  'Transactions': '/cards',  // Changed to match existing route
+  'Analytics': '/dashboard',  // Temporarily pointing to dashboard
+  'Settings': '/settings',
+  'Support': '/settings'  // Temporarily pointing to settings
+};
+
+const Drawer = ({ isOpen, isMobileOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const selectedTab = useSelector((state) => state.layout.selectedTab);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
+
+  // Sync selected tab with current route
+  React.useEffect(() => {
+    const currentTab = Object.keys(routeMap).find(
+      key => routeMap[key] === location.pathname
+    );
+    if (currentTab) {
+      dispatch(setSelectedTab(currentTab));
+    }
+  }, [location.pathname, dispatch]);
+
+  return (
+    <Sidebar 
+      $isMobile={isMobile}
+      $isOpen={isMobile ? isMobileOpen : isOpen}
+      onClick={isMobile ? onClose : undefined}
+    >
+      {menuOptions.map((item) => (
+        <MenuItem
+          key={item}
+          $active={selectedTab === item ? "true" : undefined}
+          onClick={() => {
+            dispatch(setSelectedTab(item));
+            navigate(routeMap[item]);
+          }}
+        >
+          {item}
+        </MenuItem>
+      ))}
+    </Sidebar>
   );
-}
+};
+
+export default Drawer;

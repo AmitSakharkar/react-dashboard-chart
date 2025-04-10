@@ -94,7 +94,7 @@ const AllCardsPage = () => {
               <ChipIcon src={card.id % 2 === 0 ? chipIcon2 : chipIcon1} alt="Chip" />
             </CardTop>
             <div style={{ 
-              marginTop: '40px',
+              marginTop: '20px',
               display: 'flex',
               justifyContent: 'space-between'
             }}>

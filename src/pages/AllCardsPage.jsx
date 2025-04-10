@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { cardsData } from "../components/MyCards/cardData";
+import { cardsData } from "../features/cards/components/cardData";
 import masterCardIconDark from '../assets/icon/masterCardDark.svg';
 import masterCardIconLight from "../assets/icon/masterCardLight.svg";
 import chipIcon1 from '../assets/icon/chip1.svg';

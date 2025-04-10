@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './Sidebar';
-import Header from './Header';
+import Header from './Header'; // Relative import remains the same since they're in the same directory
 import styled from 'styled-components';
 import { setIsMobileSidebarOpen } from '../store/layoutSlice';
 

@@ -2,7 +2,16 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import './ExpenseStatistics.css';
+import {
+  Container,
+  ChartContainer,
+  NoData,
+  Legend,
+  LegendItem,
+  LegendColor,
+  LegendLabel,
+  LegendValue
+} from './styles/ExpenseStatistics.styles';
 
 // Register required components
 ChartJS.register(ArcElement, Tooltip, ChartDataLabels);
@@ -10,11 +19,11 @@ ChartJS.register(ArcElement, Tooltip, ChartDataLabels);
 const ExpenseStatistics = ({ data }) => {
   if (!data || data.length === 0) {
     return (
-      <div className="expense-stats-container">
-        <div className="chart-container">
-          <div className="no-data">No expense data available</div>
-        </div>
-      </div>
+        <Container>
+          <ChartContainer>
+            <NoData>No expense data available</NoData>
+          </ChartContainer>
+        </Container>
     );
   }
 
@@ -88,23 +97,20 @@ const ExpenseStatistics = ({ data }) => {
   };
 
   return (
-    <div className="expense-stats-container">
-      <div className="chart-container">
+    <Container>
+      <ChartContainer>
         <Pie data={chartData} options={options} />
-      </div>
-      <div className="expense-legend">
+      </ChartContainer>
+      <Legend>
         {data?.map((item, index) => (
-          <div key={index} className="legend-item">
-            <span 
-              className="legend-color" 
-              style={{ backgroundColor: item.color }}
-            />
-            <span className="legend-label">{item.category}</span>
-            <span className="legend-value">${item.value}</span>
-          </div>
+          <LegendItem key={index}>
+            <LegendColor color={item.color} />
+            <LegendLabel>{item.category}</LegendLabel>
+            <LegendValue>${item.value}</LegendValue>
+          </LegendItem>
         ))}
-      </div>
-    </div>
+      </Legend>
+    </Container>
   );
 };
 

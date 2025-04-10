@@ -1,39 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { 
+  CardSection,
+  SectionHeader,
+  SeeAllButton 
+} from "../../shared/styles/commonStyles";
 import styled from "styled-components";
-import masterCardIconDark from '../../assets/icon/masterCardDark.svg';
-import masterCardIconLight from "../../assets/icon/masterCardLight.svg";
-import chipIcon1 from '../../assets/icon/chip1.svg';
-import chipIcon2 from '../../assets/icon/chip2.svg';
-import { cardsData } from './cardData';
-
-const CardSection = styled.section`
-  padding: 24px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-`;
-
-const SectionHeader = styled.h2`
-  font-size: 20px;
-  font-weight: 700;
-  color: #333B69;
-  margin-bottom: 24px;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SeeAllButton = styled.button`
-  background: none;
-  border: none;
-  color: #2D60FF;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-`;
+import masterCardIconDark from "../../../assets/icon/masterCardDark.svg";
+import masterCardIconLight from "../../../assets/icon/masterCardLight.svg";
+import chipIcon1 from "../../../assets/icon/chip1.svg";
+import chipIcon2 from "../../../assets/icon/chip2.svg";
+import { cardsData } from './cardData.js';
 
 const CardWrapper = styled.div`
   display: grid;

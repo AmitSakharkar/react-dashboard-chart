@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import EditProfile from '../features/settings/components/EditProfile';
+import Preference from '../features/settings/components/Preference';
+import Security from '../features/settings/components/Security';
 
 const Tabs = styled.div`
   display: flex;
@@ -35,41 +38,9 @@ const SettingsPage = () => {
       </Tabs>
 
       <Panel>
-        {tab === 'profile' && (
-          <form>
-            <label>Name</label><br />
-            <input type="text" placeholder="John Doe" /><br /><br />
-            <label>Email</label><br />
-            <input type="email" placeholder="john@example.com" /><br /><br />
-            <button type="submit">Save</button>
-          </form>
-        )}
-
-        {tab === 'preference' && (
-          <form>
-            <label>Theme</label><br />
-            <select>
-              <option>Light</option>
-              <option>Dark</option>
-            </select><br /><br />
-            <label>Language</label><br />
-            <select>
-              <option>English</option>
-              <option>Spanish</option>
-            </select><br /><br />
-            <button type="submit">Save Preferences</button>
-          </form>
-        )}
-
-        {tab === 'security' && (
-          <form>
-            <label>Old Password</label><br />
-            <input type="password" /><br /><br />
-            <label>New Password</label><br />
-            <input type="password" /><br /><br />
-            <button type="submit">Update Password</button>
-          </form>
-        )}
+        {tab === 'profile' && <EditProfile />}
+        {tab === 'preference' && <Preference />}
+        {tab === 'security' && <Security />}
       </Panel>
     </>
   );

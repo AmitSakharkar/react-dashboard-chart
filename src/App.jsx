@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import DashboardPage from './pages/DashboardPage';
 import AllCardsPage from './pages/AllCardsPage';
 import SettingsPage from './pages/SettingsPage';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
+import Sidebar from './features/shared/components/Sidebar';
+import Header from './features/shared/components/Header';
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
 
